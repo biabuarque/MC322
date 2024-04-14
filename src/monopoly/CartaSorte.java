@@ -1,4 +1,4 @@
-package lab1;
+package monopoly;
 
 /* Classe CartaSorte: feita para englobar as Cartas de Sorte do Banco Imobiliário.
  * - Atributos: id (identificador da carta); descricao (ou nome da carta); movimento (caso mover-se no tabuleiro
@@ -18,8 +18,6 @@ public class CartaSorte {
 	private int tempo;
 	private String restricao;
 	
-	// construtor
-	
 	public CartaSorte(int id, String descricao, int movimento, int efeito, float valor, String acao, int tempo,
 			String restricao) {
 		super();
@@ -32,8 +30,6 @@ public class CartaSorte {
 		this.tempo = tempo;
 		this.restricao = restricao;
 	}
-	
-	// getters e setters
 
 	public int getId() {
 		return id;
@@ -98,13 +94,11 @@ public class CartaSorte {
 	public void setRestricao(String restricao) {
 		this.restricao = restricao;
 	}
-	
-	// toString()
 
 	@Override
 	public String toString() {
 		return "Carta de Sorte " + id + "\n\tDescricao: " + descricao + "\n\tMovimento: " + movimento + "\n\tEfeito: " + efeito
-				+ "\n\tValor: " + valor + "\n\tAcao: " + acao + "\n\tTempo: " + tempo + "\n\tRestricao: " + restricao;
+				+ "\n\tValor: " + valor + "\n\tAcao: " + acao + "\n\tTempo: " + tempo + "\n\tRestricao: " + restricao + "\n";
 	}
 	
 	

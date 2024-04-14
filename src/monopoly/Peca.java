@@ -1,4 +1,4 @@
-package lab1;
+package monopoly;
 
 /* Classe Peca: feita para representar as peças dos jogadores de Banco Imobiliário.
  * - Atributos: cor (cor da peca); posicao (posicao da peca no tabuleiro)
@@ -9,15 +9,11 @@ public class Peca {
 	private String cor;
 	private int posicao;
 	
-	// construtor
-	
 	public Peca(String cor, int posicao) {
 		super();
 		this.cor = cor;
 		this.posicao = posicao;
 	}
-
-	// getters e setters
 	
 	public String getCor() {
 		return cor;
@@ -34,12 +30,10 @@ public class Peca {
 	public void setPosicao(int posicao) {
 		this.posicao = posicao;
 	}
-
-	// toString()
 	
 	@Override
 	public String toString() {
-		return "Peca " + cor + "\n\tPosicao: " + posicao;
+		return "Peca " + cor + "\n\tPosicao: " + posicao + "\n";
 	}
 	
 	
