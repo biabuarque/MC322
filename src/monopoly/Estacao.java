@@ -7,8 +7,8 @@ package monopoly;
 
 public class Estacao extends Propriedade {
 
-	public Estacao(String nome, Jogador proprietario, int preco, int aluguel) {
-		super(nome, proprietario, preco, aluguel);
+	public Estacao(String descricao, Jogador dono, String nome, int preco, int aluguel) {
+		super(descricao, dono, nome, preco, aluguel);
 		
 	}
 	

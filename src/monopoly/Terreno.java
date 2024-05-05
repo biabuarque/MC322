@@ -14,9 +14,9 @@ public class Terreno extends Propriedade {
 	private int valorHotel;
 	private boolean hotel;
 
-	public Terreno(String nome, Jogador proprietario, int preco, int aluguel, int numeroCasas, int valorCasa,
+	public Terreno(String descricao, Jogador dono, String nome, int preco, int aluguel, int numeroCasas, int valorCasa,
 			int valorHotel, boolean hotel) {
-		super(nome, proprietario, preco, aluguel);
+		super(descricao, dono, nome, preco, aluguel);
 		this.numeroCasas = numeroCasas;
 		this.valorCasa = valorCasa;
 		this.valorHotel = valorHotel;
@@ -74,12 +74,12 @@ public class Terreno extends Propriedade {
 	
 	public boolean comprarCasa() {
 		// REGRAS DO JOGO: podem ser construídas até 4 casas.
-		if (numeroCasas > 4 || this.getProprietario().getDinheiro() < valorCasa) {
+		if (numeroCasas > 4 || this.getDono().getDinheiro() < valorCasa) {
 			return false;
 		}
 		else {
 			numeroCasas++;
-			this.getProprietario().prejuizo(valorCasa);
+			this.getDono().prejuizo(valorCasa);
 		}
 		
 		return true;
@@ -87,18 +87,18 @@ public class Terreno extends Propriedade {
 	
 	public boolean comprarHotel() {
 		// REGRAS DO JOGO: só é possível se o terreno já tiver 4 casas.
-		if (numeroCasas <= 4 || this.getProprietario().getDinheiro() < valorHotel) {
+		if (numeroCasas <= 4 || this.getDono().getDinheiro() < valorHotel) {
 			return false;
 		}
 		else {
 			hotel = true;
-			this.getProprietario().prejuizo(valorCasa);
+			this.getDono().prejuizo(valorCasa);
 		}
 		return true;
 	}
 	
 	public String toString() {
-		return "Propriedade " + this.getId() + "\n\tNome: " + this.getNome() + "\n\tProprietario: " + ((this.getProprietario() == null) ? (this.getProprietario()) : (this.getProprietario().getNome())) 
+		return "Propriedade " + this.getId() + "\n\tDescricao: " + this.getDescricao() + "\n\tNome: " + this.getNome() + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) 
 				+ "\n\tPreco: " + this.getPreco() + "\n\tAluguel: " + this.getAluguel() + "\n\tNumero de casas: " + numeroCasas + "\n\tPreco Casa: " + valorCasa + "\n\tPreco Hotel: " + valorHotel + "\n";
 	}
 }

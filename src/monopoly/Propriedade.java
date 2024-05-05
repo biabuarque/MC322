@@ -5,32 +5,16 @@ package monopoly;
  * - Métodos:	getters e setters; calcularAluguel(); toString().
  */
 
-public class Propriedade {
-	private int id;
+public class Propriedade extends Carta{
 	private String nome;
-	// tipo de variável modificada para facilitar a compra de propriedades (+ casas ou hotel) e pagamento de aluguel
-	private Jogador proprietario; 
 	private int preco;
 	private int aluguel;
-	private static int contador = 0;
 	
-	public Propriedade(String nome, Jogador proprietario, int preco, int aluguel) {
-		super();
-		this.id = contador;
+	public Propriedade(String descricao, Jogador dono, String nome, int preco, int aluguel) {
+		super(descricao, dono);
 		this.nome = nome;
-		this.proprietario = proprietario;
 		this.preco = preco;
 		this.aluguel = aluguel;
-		// aumenta o valor do contador (novo valor será o id da próxima propriedade adicionada)
-		contador++;
-	}
-
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getNome() {
@@ -39,14 +23,6 @@ public class Propriedade {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public Jogador getProprietario() {
-		return proprietario;
-	}
-	
-	public void setProprietario(Jogador proprietario) {
-		this.proprietario = proprietario;
 	}
 	
 	public int getPreco() {
@@ -72,7 +48,7 @@ public class Propriedade {
 
 	@Override
 	public String toString() {
-		return "Propriedade " + id + "\n\tNome: " + nome + "\n\tProprietario: " + ((proprietario == null) ? (proprietario) : (proprietario.getNome())) + "\n\tPreco: " + preco
+		return "Propriedade " + this.getId() + "\n\tDescricao: " + this.getDescricao() + "\n\tDono: " + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) + "\n\tNome: " + nome + "\n\tPreco: " + preco
 				+ "\n\tAluguel: " + aluguel + "\n";
 	}
 	

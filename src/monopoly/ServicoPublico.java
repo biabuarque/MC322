@@ -10,9 +10,9 @@ package monopoly;
 
 public class ServicoPublico extends Propriedade {
 
-	public ServicoPublico(String nome, Jogador proprietario, int preco, int aluguel) {
-		super(nome, proprietario, preco, aluguel);
-
+	public ServicoPublico(String descricao, Jogador dono, String nome, int preco, int aluguel) {
+		super(descricao, dono, nome, preco, aluguel);
+		
 	}
 
 	public int calcularAluguel(int dados) {

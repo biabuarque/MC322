@@ -1,5 +1,7 @@
 package monopoly;
 
+import java.util.ArrayList;
+
 /* Classe Tabuleiro: feita para representar o tabuleiro do jogode Banco Imobiliário.
  * - Atributos: jogadores (vetor de objetos Jogador), propriedades (vetor de objetos Propriedade).
  * - Métodos:	getters e setters; addJogador (adiciona um jogador ao jogo); 
@@ -10,26 +12,26 @@ package monopoly;
 import java.util.Scanner;
 
 public class Tabuleiro {
-	private Jogador[] jogadores; 
-	private Propriedade[] propriedades;
+	private ArrayList<Jogador> jogadores; 
+	private ArrayList<Propriedade> propriedades;
 
 	public Tabuleiro() {
 		super();
-		this.jogadores = new Jogador[6];
-		this.propriedades = new Propriedade[28];
+		this.jogadores = new ArrayList<Jogador>();
+		this.propriedades = new ArrayList<Propriedade>();
 	}
 	
-	public Jogador[] getJogadores() {
+	public ArrayList<Jogador> getJogadores() {
 		return jogadores;
 	}
 
-	public Propriedade[] getPropriedades() {
+	public ArrayList<Propriedade> getPropriedades() {
 		return propriedades;
 	}
 
 	public boolean addJogador() {
 		// REGRAS DO JOGO: o número máximo de jogadores é 6.
-		if (jogadores[5] != null) {
+		if (jogadores.size() == 6) {
 			return false;
 		}
 		Scanner input = new Scanner(System.in);
@@ -52,36 +54,37 @@ public class Tabuleiro {
 		System.out.print("\n\tLink para foto: ");
 		String foto = input.nextLine();
 		
-		Jogador jog = new Jogador(nome, cpf, email, foto);
-		jogadores[jog.getId()] = jog;
+		Jogador jog = new Jogador(nome, cpf, foto, email);
 		
-		return true;
+		System.out.print("\n\tCor da peca: ");
+		String cor = input.nextLine();
+		
+		Peca peca = new Peca(cor, 0);
+		jog.associarPeca(peca);
+		
+		return jogadores.add(jog);
 	}
 	
 	public boolean removeJogador(int id) {
-		if (jogadores[id] == null) {
-			return false;
-		}
-		jogadores[id] = null;
-		return true;
+		return jogadores.remove(jogadores.get(id));
 	}
 	
 	// LAB2: Por enquanto, preferi passar a propriedade como parâmetro.
 	// TODO: entrada de dados p/ add propriedade!
 	public boolean addPropriedade(Propriedade p) {
 		// REGRAS DO JOGO: o número máximo de propriedades é 28.
-		if (propriedades[p.getId()] != null || p.getId() > 27) {
-			return false;
-		}
-		propriedades[p.getId()] = p;
-		return true;
+		return propriedades.add(p);
 	}
 	
 	public boolean removePropriedade(int id) {
-		if (propriedades[id] == null) {
-			return false;
+		int index = -1;
+		for (int i = 0; i < propriedades.size(); i++) {
+			if (propriedades.get(i).getId() == id) {
+				index = i;
+				break;
+			}
 		}
-		propriedades[id] = null;
-		return true;
+		
+		return propriedades.remove(propriedades.get(index));
 	}
 }

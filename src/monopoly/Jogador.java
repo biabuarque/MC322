@@ -1,5 +1,7 @@
 package monopoly;
 
+import java.util.ArrayList;
+
 /* Classe Jogador: feita para descrever os jogadores de Banco Imobiliário.
  * - Atributos: id, dinheiro, nome, CPF, foto, email, contador (atributo de classe).
  * - Métodos:	getters e setters; prejuizo; lucro; toString().
@@ -12,16 +14,19 @@ public class Jogador {
 	private String cpf;
 	private String foto;
 	private String email;
+	ArrayList<Carta> cartas;
+	Peca peca;
 	private static int contador = 0;
 	
 	public Jogador(String nome, String cpf, String foto, String email) {
 		super();
 		this.id = contador;
-		this.dinheiro = 2558000; // conforme as regras do jogo :)
+		this.dinheiro = 2458; // conforme as regras do jogo :)
 		this.nome = nome;
 		this.cpf = cpf;
 		this.foto = foto;
 		this.email = email;
+		this.cartas = new ArrayList<Carta>();
 		// aumenta o valor do contador (novo valor será o id do próximo jogador adicionado)
 		contador++;
 	}	
@@ -37,15 +42,6 @@ public class Jogador {
 	public int getDinheiro() {
 		return dinheiro;
 	}
-	
-	// ao invés de setDinheiro, considerei melhores as funções prejuizo/lucro
-	public void prejuizo(int prejuizo) {
-		this.dinheiro -= prejuizo;
-	}
-	
-	public void lucro(int lucro) {
-		this.dinheiro += lucro;
-	}
 
 	public String getNome() {
 		return nome;
@@ -60,7 +56,9 @@ public class Jogador {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		if (ValidarDados.validarCPF(cpf)) {
+			this.cpf = cpf;
+		}
 	}
 
 	public String getFoto() {
@@ -77,6 +75,58 @@ public class Jogador {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public ArrayList<Carta> getCartas() {
+		return cartas;
+	}
+
+	public void setCartas(ArrayList<Carta> cartas) {
+		this.cartas = cartas;
+	}
+
+	public Peca getPeca() {
+		return peca;
+	}
+
+	public void setPeca(Peca peca) {
+		this.peca = peca;
+	}
+
+		// ao invés de setDinheiro, considerei melhores as funções prejuizo/lucro
+		public void prejuizo(int prejuizo) {
+			this.dinheiro -= prejuizo;
+		}
+		
+		public void lucro(int lucro) {
+			this.dinheiro += lucro;
+		}
+		
+	public boolean associarPeca(Peca peca) {
+		if (this.peca == null) {
+			this.peca = peca;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean adicionarCarta(Carta carta) {
+		carta.setDono(this);
+		return cartas.add(carta);
+	}
+	
+	// como remover carta seria usado em vendas de propriedade ou para retornar uma carta sorte ao tabuleiro:
+	public Carta removerCarta(int id) {
+		int index = -1;
+		for (int i = 0; i < cartas.size(); i++) {
+			if (cartas.get(i).getId() == id) {
+				index = i;
+				break;
+			}
+		}
+		
+		return cartas.remove(index);
 	}
 	
 	@Override
