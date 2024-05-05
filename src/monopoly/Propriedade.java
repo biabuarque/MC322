@@ -1,7 +1,7 @@
 package monopoly;
 
 /* Classe Propriedade: representa as propriedades no Banco Imobiliário.
- * - Atributos: id, nome, proprietário, preço, aluguel, contador (atributo de classe)..
+ * - Atributos: herdados de Carta + nome, proprietário, preço, aluguel.
  * - Métodos:	getters e setters; calcularAluguel(); toString().
  */
 

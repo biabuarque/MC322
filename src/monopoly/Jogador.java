@@ -3,8 +3,8 @@ package monopoly;
 import java.util.ArrayList;
 
 /* Classe Jogador: feita para descrever os jogadores de Banco Imobiliário.
- * - Atributos: id, dinheiro, nome, CPF, foto, email, contador (atributo de classe).
- * - Métodos:	getters e setters; prejuizo; lucro; toString().
+ * - Atributos: id, dinheiro, nome, CPF, foto, email, contador (atributo de classe), cartas.
+ * - Métodos:	getters e setters; prejuizo; lucro; associarPeca; adicionarCarta; removerCarta; toString().
  */
 
 public class Jogador {

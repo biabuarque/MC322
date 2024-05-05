@@ -42,12 +42,12 @@ public class Tabuleiro {
 		
 		String cpf, email;
 		do {
-			System.out.print("\n\tCPF: ");
+			System.out.print("\n\tCPF (válido): ");
 			cpf = input.nextLine();
 		} while(!ValidarDados.validarCPF(cpf));
 		
 		do {
-			System.out.print("\n\tE-mail: ");
+			System.out.print("\n\tE-mail (válido): ");
 			email = input.nextLine();
 		} while(!ValidarDados.validarEmail(email));
 		

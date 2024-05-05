@@ -1,5 +1,10 @@
 package monopoly;
 
+/* Classe Carta: feita para representar as cartas dos jogadores de Banco Imobiliário.
+ * - Atributos: id, descricao, dono, contador (atributo de classe)
+ * - Métodos:	getters e setters.
+ */
+
 public class Carta {
 		private int id;
 		private String descricao;

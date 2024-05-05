@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class Main {
 	
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
 		menu();
+		input.close(); // fecha todos os scanners
 	}
 	
 	public static int menu(){
@@ -73,6 +75,10 @@ public class Main {
 				break;
 			
 			case 2: // Editar Jogador
+				if (tab.getJogadores().isEmpty()){
+					System.out.println("Ainda não há jogadores!");
+				}
+				else {
 				System.out.println("Qual jogador você deseja editar?\n");
 				for (int i = 0; i < tab.getJogadores().size(); i++) {
 					System.out.println("\t(" + i + ")" + tab.getJogadores().get(i).getNome() + "\n");
@@ -105,15 +111,20 @@ public class Main {
 					case 5: // Voltar
 						break;
 				}
+			}
 				break;
 			case 3: // Remover Jogador
+			if (tab.getJogadores().isEmpty()){
+				System.out.println("Ainda não há jogadores!");
+			}
+			else {
 				System.out.println("Qual jogador você deseja remover?\n");
 				for (int i = 0; i < tab.getJogadores().size(); i++) {
 					System.out.println("\t(" + i + ")" + tab.getJogadores().get(i).getNome() + "\n");
 				}
 				int idRemocao = input.nextInt();
 				System.out.println("Jogador removido!\n" + tab.removeJogador(idRemocao));
-				
+			}
 				break;
 			case 4: // Voltar
 				break;
@@ -177,7 +188,7 @@ public class Main {
 									+ "\n\t(1) Terreno"
 									+ "\n\t(2) Servico Publico"
 									+ "\n\t(3) Estacao"
-									+ "\n\t (4) Cancelar");
+									+ "\n\t(4) Cancelar");
 							int optProp = input.nextInt();
 							input.nextLine();
 							if (optProp == 4) {
@@ -210,6 +221,10 @@ public class Main {
 						}
 						break;
 					case 2: // Remover Carta
+					if (cartas.isEmpty()){
+						System.out.println("Ainda não há cartas!");
+					}
+					else{
 						System.out.println("Qual carta você deseja remover?\n");
 						for (int i = 0; i < cartas.size(); i++) {
 							System.out.println("\t(" + i + ")" + cartas.get(i).getDescricao() + "\n");
@@ -221,6 +236,7 @@ public class Main {
 							tab.removePropriedade(idRemocao);
 						}
 						break;
+					}
 					case 3: // Voltar
 						break;
 				}
@@ -229,6 +245,10 @@ public class Main {
 	}
 	
 	public static int menuAcoes(Tabuleiro tab, ArrayList<Carta> cartas) {
+		if (tab.getJogadores().isEmpty()){
+			System.out.println("Ainda não há jogadores!");
+			return 0;
+		}
 		Scanner input = new Scanner (System.in);
 		System.out.println("Qual jogador ira agir?\n");
 		for (int i = 0; i < tab.getJogadores().size(); i++) {
@@ -267,7 +287,7 @@ public class Main {
 					
 					cobrado.prejuizo(prop.calcularAluguel());
 					jog.lucro(prop.calcularAluguel());
-					
+					System.out.println("Situação atual de " + cobrado.getNome() + "\n" + cobrado);
 					break;
 					
 				case 3: //Melhorar terreno
@@ -315,6 +335,7 @@ public class Main {
 				case 5: //Voltar
 					break;
 				}
+				System.out.println("Situação atual de " + jog.getNome() + "\n" + jog);
 		} while (opt!= 5);
 		return 0;
 	}

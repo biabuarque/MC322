@@ -2,10 +2,8 @@ package monopoly;
 
 /* Classe Servico Publico: feita para representar um tipo de propriedade: aquelas do Estado
  * 							(em outras versões, companhias públicas ou privadas).
- * - Atributos: jogadores (vetor), propriedades (vetor).
- * - Métodos:	getters e setters; addJogador (adiciona um jogador ao jogo); 
- *   removeJogador (remove um jogador do jogo), addPropriedade e removePropriedade
- *   (simétricos de addJogador e removeJogador).
+ * - Atributos: herdados de Propriedade.
+ * - Métodos:	getters e setters; calcularAluguel().
  */
 
 public class ServicoPublico extends Propriedade {

@@ -1,5 +1,10 @@
 package monopoly;
 
+/* Classe CartaSorte: feita para representar as cartas sorte-reves de Banco Imobiliário.
+ * - Atributos: herdados de Carta + movimento, efeito, valor, acao, tempo, restricao
+ * - Métodos:	getters e setters, toString().
+ */
+
 public class CartaSorte extends Carta {
 	
 	private int movimento;
