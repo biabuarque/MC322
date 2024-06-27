@@ -6,7 +6,7 @@ package monopoly;
  */
 
 public class CartaSorte extends Carta {
-	
+
 	private int movimento;
 	private int efeito;
 	private float valor;
@@ -72,7 +72,22 @@ public class CartaSorte extends Carta {
 	public void setRestricao(String restricao) {
 		this.restricao = restricao;
 	}
-	
+
+	/*O método executaAcao da classe CartaSorte deve alterar o saldo do
+	jogador de acordo com o valor da carta */
+	public void executaAcao(Jogador jogador) {
+		if (valor <= 0){
+			jogador.prejuizo((int)valor);
+			if (jogador.getDinheiro() < 0){
+				jogador.prejuizo(jogador.getDinheiro());
+			}
+		}
+		else{
+			jogador.lucro((int)valor);
+		}
+
+	}
+
 	@Override
 	public String toString() {
 		return "Carta de Sorte " + this.getId() + "\n\tDescricao: " + this.getDescricao() + "\n\tDono: " + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) + "\n\tMovimento: " + movimento + "\n\tEfeito: " + efeito

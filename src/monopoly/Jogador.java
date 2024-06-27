@@ -93,14 +93,14 @@ public class Jogador {
 		this.peca = peca;
 	}
 
-		// ao invés de setDinheiro, considerei melhores as funções prejuizo/lucro
-		public void prejuizo(int prejuizo) {
-			this.dinheiro -= prejuizo;
-		}
-		
-		public void lucro(int lucro) {
-			this.dinheiro += lucro;
-		}
+	// ao invés de setDinheiro, considerei melhores as funções prejuizo/lucro
+	public void prejuizo(int prejuizo) {
+		this.dinheiro -= prejuizo;
+	}
+	
+	public void lucro(int lucro) {
+		this.dinheiro += lucro;
+	}
 		
 	public boolean associarPeca(Peca peca) {
 		if (this.peca == null) {

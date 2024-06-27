@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-public class Tabuleiro {
+public class Tabuleiro extends Salvavel{
 	private ArrayList<Jogador> jogadores; 
 	private ArrayList<Propriedade> propriedades;
 
@@ -86,5 +86,15 @@ public class Tabuleiro {
 		}
 		
 		return propriedades.remove(propriedades.get(index));
+	}
+
+	public void salvaLog(){
+		// TODO
+	}
+
+
+	/* O método distribuirCartas() em Tabuleiro deve ser implementado conforme a lógica do jogo; */
+	public void distribuirCartas(){
+		// TODO
 	}
 }
