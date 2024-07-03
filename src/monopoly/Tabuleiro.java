@@ -1,22 +1,13 @@
 package monopoly;
 
 import java.util.ArrayList;
-
-/* Classe Tabuleiro: feita para representar o tabuleiro do jogode Banco Imobiliário.
- * - Atributos: jogadores (vetor de objetos Jogador), propriedades (vetor de objetos Propriedade).
- * - Métodos:	getters e setters; addJogador (adiciona um jogador ao jogo); 
- *   removeJogador (remove um jogador do jogo), addPropriedade e removePropriedade
- *   (simétricos de addJogador e removeJogador).
- */
-
 import java.util.Scanner;
 
-public class Tabuleiro extends Salvavel{
+public class Tabuleiro implements Salvavel{
 	private ArrayList<Jogador> jogadores; 
 	private ArrayList<Propriedade> propriedades;
 
 	public Tabuleiro() {
-		super();
 		this.jogadores = new ArrayList<Jogador>();
 		this.propriedades = new ArrayList<Propriedade>();
 	}
@@ -95,6 +86,20 @@ public class Tabuleiro extends Salvavel{
 
 	/* O método distribuirCartas() em Tabuleiro deve ser implementado conforme a lógica do jogo; */
 	public void distribuirCartas(){
-		// TODO
+		if (propriedades.size() == 0) {
+			System.out.println("Nao ha propriedades para distribuir cartas.");
+			return;
+		}
+		else if (jogadores.size() == 0) {
+			System.out.println("Nao ha jogadores para distribuir cartas.");
+			return;
+		}
+		else if (jogadores.size() > propriedades.size()) {
+			System.out.println("Ha mais jogadores do que propriedades.");
+			return;
+		}
+		for (int i = 0; i < jogadores.size(); i++) {
+			jogadores.get(i).adicionarCarta(propriedades.get(i));
+		}
 	}
 }
