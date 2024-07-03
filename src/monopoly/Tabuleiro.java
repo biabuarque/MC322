@@ -1,5 +1,6 @@
 package monopoly;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,6 +69,10 @@ public class Tabuleiro implements Salvavel{
 	}
 	
 	public boolean removePropriedade(int id) {
+		if (propriedades.size() == 0) {
+			System.out.println("Nao ha propriedades para remover.");
+			return false;
+		}
 		int index = -1;
 		for (int i = 0; i < propriedades.size(); i++) {
 			if (propriedades.get(i).getId() == id) {
@@ -79,8 +84,24 @@ public class Tabuleiro implements Salvavel{
 		return propriedades.remove(propriedades.get(index));
 	}
 
-	public void salvaLog(){
-		// TODO
+	public boolean salvaLog(){
+		try {
+			File file = new File("log.txt");
+			if (!file.canWrite()){
+				return false;
+			}
+			BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
+		} 
+		catch (IOException ex) {
+			return false;
+		}
+		finally{
+			in.write("teste \n");
+		}
+		
+		// TODO: testar e verificar se presta
+		
+
 	}
 
 
