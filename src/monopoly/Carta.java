@@ -9,14 +9,12 @@ public class Carta {
 	private int id;
 	private String descricao;
 	private Jogador dono;
-	private TipoCarta tipo;
 	private static int contador = 0;
 	
-	public Carta(String descricao, Jogador dono, TipoCarta tipo) {
+	public Carta(String descricao, Jogador dono) {
 		this.id = contador;
 		this.descricao = descricao;
 		this.dono = dono;
-		this.tipo = tipo;
 		contador++;
 	}
 
@@ -43,10 +41,5 @@ public class Carta {
 	public void setDono(Jogador dono) {
 		this.dono = dono;
 	}
-
-	public TipoCarta getTipo() {
-		return tipo;
-	}
-
-		
+	
 }

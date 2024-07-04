@@ -13,10 +13,12 @@ public class CartaSorte extends Carta {
 	private String acao;
 	private int tempo;
 	private String restricao;
+	private TipoCarta tipo;
 	
-	public CartaSorte(String descricao, Jogador dono, int movimento, int efeito, float valor, String acao,
+	public CartaSorte(String descricao, Jogador dono, TipoCarta tipo, int movimento, int efeito, float valor, String acao,
 			int tempo, String restricao) {
 		super(descricao, dono);
+		this.tipo = tipo;
 		this.movimento = movimento;
 		this.efeito = efeito;
 		this.valor = valor;
@@ -73,6 +75,14 @@ public class CartaSorte extends Carta {
 		this.restricao = restricao;
 	}
 
+	public TipoCarta getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoCarta tipo) {
+		this.tipo = tipo;
+	}
+
 	/*O método executaAcao da classe CartaSorte deve alterar o saldo do
 	jogador de acordo com o valor da carta */
 	public void executaAcao(Jogador jogador) {
@@ -90,7 +100,7 @@ public class CartaSorte extends Carta {
 
 	@Override
 	public String toString() {
-		return "Carta de Sorte " + this.getId() + "\n\tDescricao: " + this.getDescricao() + "\n\tDono: " + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) + "\n\tMovimento: " + movimento + "\n\tEfeito: " + efeito
+		return "Carta de Sorte " + this.getId() + this.tipo + "\n\tDescricao: " + this.getDescricao() + "\n\tDono: " + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) + "\n\tMovimento: " + movimento + "\n\tEfeito: " + efeito
 				+ "\n\tValor: " + valor + "\n\tAcao: " + acao + "\n\tTempo: " + tempo + "\n\tRestricao: " + restricao + "\n";
 	}
 

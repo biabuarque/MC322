@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tabuleiro implements Salvavel{
-	private ArrayList<Jogador> jogadores; 
-	private ArrayList<Propriedade> propriedades;
+	private ArrayList<Jogador> jogadores = null; 
+	private ArrayList<Propriedade> propriedades = null;
 
 	public Tabuleiro() {
 		this.jogadores = new ArrayList<Jogador>();
@@ -69,7 +69,7 @@ public class Tabuleiro implements Salvavel{
 	}
 	
 	public boolean removePropriedade(int id) {
-		if (propriedades.size() == 0) {
+		if (propriedades.isEmpty()) {
 			System.out.println("Nao ha propriedades para remover.");
 			return false;
 		}
@@ -86,33 +86,18 @@ public class Tabuleiro implements Salvavel{
 
 	// ideia: criar método "criar arquivo" ou classe "log" separadamente...
 	public boolean salvaLog(){
-		try {
-			File file = new File("log.txt");
-			if (!file.canWrite()){
-				return false;
-			}
-			BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
-		} 
-		catch (IOException ex) {
-			return false;
-		}
-		finally{
-			in.write("teste \n");
-		}
-		
-		// TODO: testar e verificar se presta
-		
 
+		return true;
 	}
 
 
 	/* O método distribuirCartas() em Tabuleiro deve ser implementado conforme a lógica do jogo; */
 	public void distribuirCartas(){
-		if (propriedades.size() == 0) {
+		if (propriedades.isEmpty()) {
 			System.out.println("Nao ha propriedades para distribuir cartas.");
 			return;
 		}
-		else if (jogadores.size() == 0) {
+		else if (jogadores.isEmpty()) {
 			System.out.println("Nao ha jogadores para distribuir cartas.");
 			return;
 		}
