@@ -97,6 +97,7 @@ public class Terreno extends Propriedade {
 		return true;
 	}
 	
+	@Override
 	public String toString() {
 		return "Propriedade " + this.getId() + "\n\tDescricao: " + this.getDescricao() + "\n\tNome: " + this.getNome() + "\n\tDono: " + ((this.getDono() == null) ? (this.getDono()) : (this.getDono().getNome())) 
 				+ "\n\tPreco: " + this.getPreco() + "\n\tAluguel: " + this.getAluguel() + "\n\tNumero de casas: " + numeroCasas + "\n\tPreco Casa: " + valorCasa + "\n\tPreco Hotel: " + valorHotel + "\n";

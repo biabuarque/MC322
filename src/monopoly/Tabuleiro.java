@@ -84,11 +84,22 @@ public class Tabuleiro implements Salvavel{
 		return propriedades.remove(propriedades.get(index));
 	}
 
-	// ideia: criar método "criar arquivo" ou classe "log" separadamente...
-	public boolean salvaLog(){
-
-		return true;
+	// salvaLog tem parâmetro em string log, ou seja, as ações serão passadas como parâmetro em cada método
+	public boolean salvaLog(String log) {
+		try {
+			File file = new File("/home/biabuarque/Desktop/322/src/monopoly/log.txt");
+                    try (FileWriter writer = new FileWriter(file, true)) {
+                        writer.write(log + "\n");
+                    }
+					
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error occurred while saving log: " + e.getMessage());
+			return false;
+		}
 	}
+	
 
 
 	/* O método distribuirCartas() em Tabuleiro deve ser implementado conforme a lógica do jogo; */

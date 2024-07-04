@@ -5,5 +5,5 @@ método deve ser implementado para salvar todas as ações executadas pelos joga
 texto; */
 
 public interface Salvavel {
-    public void salvaLog();
+    public boolean salvaLog(String log);
 }
