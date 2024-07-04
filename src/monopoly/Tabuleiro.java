@@ -84,6 +84,7 @@ public class Tabuleiro implements Salvavel{
 		return propriedades.remove(propriedades.get(index));
 	}
 
+	// ideia: criar método "criar arquivo" ou classe "log" separadamente...
 	public boolean salvaLog(){
 		try {
 			File file = new File("log.txt");

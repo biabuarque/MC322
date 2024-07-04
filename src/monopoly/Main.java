@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class Main {
 	
+	/* 7. Implemente o tratamento de excecoes para quando o jogador tentar comprar algo que nao tenha recurso; 
+	 * ideia: mudar alguns booleanos implementados pra try catch...
+	*/
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		menu();
