@@ -87,15 +87,19 @@ public class CartaSorte extends Carta {
 	jogador de acordo com o valor da carta */
 	public void executaAcao(Jogador jogador) {
 		if (valor <= 0){
-			jogador.prejuizo((int)valor);
-			if (jogador.getDinheiro() < 0){
-				jogador.prejuizo(jogador.getDinheiro());
+			try {
+				jogador.prejuizo((int)valor);
+			} catch (Exception e) {
+				try {
+					jogador.prejuizo(jogador.getDinheiro());
+					System.out.println("Jogador " + jogador.getNome() + " faliu!");
+				} catch (Exception impossible) {
+				}
 			}
 		}
 		else{
 			jogador.lucro((int)valor);
 		}
-
 	}
 
 	@Override

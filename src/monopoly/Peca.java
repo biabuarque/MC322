@@ -29,6 +29,7 @@ public class Peca {
 	
 	public void andar(int casas) {
 		this.posicao += casas;
+		this.posicao %= 40;
 	}
 	
 	@Override

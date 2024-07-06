@@ -94,7 +94,10 @@ public class Jogador {
 	}
 
 	// ao invés de setDinheiro, considerei melhores as funções prejuizo/lucro
-	public void prejuizo(int prejuizo) {
+	public void prejuizo(int prejuizo) throws PlayerException {
+		if (this.dinheiro < prejuizo) {
+			throw new PlayerException();
+		}	
 		this.dinheiro -= prejuizo;
 	}
 	

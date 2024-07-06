@@ -26,43 +26,42 @@ public class Tabuleiro implements Salvavel{
 		if (jogadores.size() == 6) {
 			return false;
 		}
-		Scanner input = new Scanner(System.in);
-		
-		System.out.print("Adicione um jogador!"
-				+ "\n\tNome: ");
-		String nome = input.nextLine();
-		
-		String cpf, email;
-		do {
-			System.out.print("\n\tCPF (válido): ");
-			cpf = input.nextLine();
-		} while(!ValidarDados.validarCPF(cpf));
-		
-		do {
-			System.out.print("\n\tE-mail (válido): ");
-			email = input.nextLine();
-		} while(!ValidarDados.validarEmail(email));
-		
-		System.out.print("\n\tLink para foto: ");
-		String foto = input.nextLine();
-		
-		Jogador jog = new Jogador(nome, cpf, foto, email);
-		
-		System.out.print("\n\tCor da peca: ");
-		String cor = input.nextLine();
-		
-		Peca peca = new Peca(cor, 0);
-		jog.associarPeca(peca);
-		
-		return jogadores.add(jog);
+		try (Scanner input = new Scanner(System.in)) {
+			System.out.print("Adicione um jogador!"
+					+ "\n\tNome: ");
+			String nome = input.nextLine();
+			
+			String cpf, email;
+			do {
+				System.out.print("\n\tCPF (válido): ");
+				cpf = input.nextLine();
+			} while(!ValidarDados.validarCPF(cpf));
+			
+			do {
+				System.out.print("\n\tE-mail (válido): ");
+				email = input.nextLine();
+			} while(!ValidarDados.validarEmail(email));
+			
+			System.out.print("\n\tLink para foto: ");
+			String foto = input.nextLine();
+			
+			Jogador jog = new Jogador(nome, cpf, foto, email);
+			
+			System.out.print("\n\tCor da peca: ");
+			String cor = input.nextLine();
+			
+			Peca peca = new Peca(cor, 0);
+			jog.associarPeca(peca);
+			
+			return jogadores.add(jog);
+		}
 	}
 	
 	public boolean removeJogador(int id) {
 		return jogadores.remove(jogadores.get(id));
 	}
 	
-	// LAB2: Por enquanto, preferi passar a propriedade como parâmetro.
-	// TODO: entrada de dados p/ add propriedade!
+	// LAB2: Preferi passar a propriedade como parâmetro.
 	public boolean addPropriedade(Propriedade p) {
 		// REGRAS DO JOGO: o número máximo de propriedades é 28.
 		return propriedades.add(p);
@@ -94,7 +93,6 @@ public class Tabuleiro implements Salvavel{
 					
 			return true;
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.err.println("Error occurred while saving log: " + e.getMessage());
 			return false;
 		}

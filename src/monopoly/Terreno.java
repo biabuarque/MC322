@@ -72,23 +72,27 @@ public class Terreno extends Propriedade {
 		return aluguel;
 	}
 	
-	public boolean comprarCasa() {
+	public void comprarCasa() throws PlayerException {
 		// REGRAS DO JOGO: podem ser construídas até 4 casas.
-		if (numeroCasas > 4 || this.getDono().getDinheiro() < valorCasa) {
-			return false;
+		if (this.getDono().getDinheiro() < valorCasa) {
+			throw new PlayerException();
+		}
+		else if (numeroCasas > 4) {
+			throw new PlayerException("Número máximo de casas atingido.");
 		}
 		else {
 			numeroCasas++;
 			this.getDono().prejuizo(valorCasa);
 		}
-		
-		return true;
 	}
 	
-	public boolean comprarHotel() {
+	public boolean comprarHotel() throws PlayerException{
 		// REGRAS DO JOGO: só é possível se o terreno já tiver 4 casas.
-		if (numeroCasas <= 4 || this.getDono().getDinheiro() < valorHotel) {
-			return false;
+		if (this.getDono().getDinheiro() < valorHotel) {
+			throw new PlayerException();
+		}
+		else if (numeroCasas <= 4) {
+			throw new PlayerException("Número máximo de casas não foi atingido.");
 		}
 		else {
 			hotel = true;
