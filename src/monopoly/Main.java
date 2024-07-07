@@ -2,11 +2,15 @@ package monopoly;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+/* Classe Main: classe principal do jogo, onde ele e executado.
+ * - Atributos: nenhum.
+ * - Metodos: menu; menuJogadores; menuCartas; menuAcoes.
+ */
+
 
 public class Main {
 	
 	/* 7. Implemente o tratamento de excecoes para quando o jogador tentar comprar algo que nao tenha recurso; 
-	 * ideia: mudar alguns booleanos implementados pra try catch...
 	*/
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -27,6 +31,7 @@ public class Main {
 		}
 		
 		Tabuleiro tabuleiro = new Tabuleiro();
+		tabuleiro.salvaLog("Novo jogo iniciado.");
 		ArrayList<Carta> totalCartas= new ArrayList<Carta>();
 		System.out.println("Novo tabuleiro criado.");
 		do {
@@ -70,6 +75,7 @@ public class Main {
 			case 1: // Adicionar Jogador
 				boolean verificador = tab.addJogador();
 				if (verificador) {
+					tab.salvaLog("Jogador " + tab.getJogadores().get(tab.getJogadores().size() - 1).getNome() + " adicionado.");
 					System.out.println("\nJogador adicionado! :)\n\t" + tab.getJogadores().get(tab.getJogadores().size() - 1));
 				}
 				else {
@@ -126,6 +132,7 @@ public class Main {
 					System.out.println("\t(" + i + ")" + tab.getJogadores().get(i).getNome() + "\n");
 				}
 				int idRemocao = input.nextInt();
+				tab.salvaLog("Jogador " + tab.getJogadores().get(idRemocao).getNome() + "removido.");
 				System.out.println("Jogador removido!\n" + tab.removeJogador(idRemocao));
 			}
 				break;
@@ -182,7 +189,7 @@ public class Main {
 							String restricao = input.nextLine();
 							CartaSorte carta = new CartaSorte(descricao, null, (efeito >= 0 ? TipoCarta.SORTE : TipoCarta.REVES), movimento, efeito, valor, acao, tempo, restricao);
 							cartas.add(carta);
-							
+							tab.salvaLog("Carta " + carta.getTipo() + " adicionada ao baralho: " + carta.getDescricao() + ".");
 							System.out.println("Carta adicionada!\n" + carta);
 						}
 						
@@ -225,6 +232,7 @@ public class Main {
 							}
 							cartas.add(prop);
 							tab.getPropriedades().add(prop);
+							tab.salvaLog("Carta adicionada ao baralho: " + prop.getNome() + " " + prop.getDescricao() + ".");
 							System.out.println("Carta adicionada!\n" + prop);
 						}
 						break;
@@ -239,6 +247,7 @@ public class Main {
 						}
 						int idRemocao = input.nextInt();
 						Carta cartaRemocao = cartas.remove(idRemocao);
+						tab.salvaLog("Carta removida do baralho: " + cartaRemocao.getDescricao() + ".");
 						System.out.println("Carta removida!\n" + cartaRemocao);
 						if (tab.getPropriedades().contains((Propriedade)cartaRemocao)) {
 							tab.removePropriedade(idRemocao);
@@ -278,6 +287,7 @@ public class Main {
 					System.out.println("Quantas casas?");
 					int casas = input.nextInt();
 					tab.getJogadores().get(idJogador).getPeca().andar(casas);
+					tab.salvaLog("Jogador " + tab.getJogadores().get(idJogador).getNome() + " andou " + casas + " casas.");
 					break;
 				case 2: //Cobrar aluguel
 					if (jog.getCartas().isEmpty()){
@@ -302,6 +312,7 @@ public class Main {
 					Jogador cobrado = tab.getJogadores().get(idCobrado);
 					try {
 						cobrado.prejuizo(prop.calcularAluguel());
+						tab.salvaLog("Jogador " + cobrado.getNome() + " pagou aluguel de " + prop.calcularAluguel() + " para " + jog.getNome() + ".");
 					} catch (Exception e) {
 						System.out.println("O jogador não tem dinheiro para pagar o aluguel!");
 						break;
@@ -316,11 +327,12 @@ public class Main {
 						break;
 					}
 					System.out.println("Qual terreno?\n");
-					for (int i = 0; i < jog.getCartas().size() && jog.getCartas().get(i) instanceof Terreno; i++) {
+					for (int i = 0; i < tab.getPropriedades().size() && tab.getPropriedades().get(i) instanceof Terreno; i++) {
 						System.out.println("\t(" + i + ")" + tab.getPropriedades().get(i).getNome() + " R$" + tab.getPropriedades().get(i).calcularAluguel() + "\n");
 					}
 					int idTerreno = input.nextInt();
-					Terreno terreno = (Terreno)jog.getCartas().get(idTerreno);
+					Terreno terreno = (Terreno)tab.getPropriedades().get(idTerreno);
+					terreno.setDono(jog);
 					System.out.println("Escolha uma opcao"
 							+ "\n\t(1) Comprar casa"
 							+ "\n\t(2) Comprar hotel"
@@ -330,6 +342,7 @@ public class Main {
 					if (optTerreno == 1) {
 						try {
 							terreno.comprarCasa();
+							tab.salvaLog("Jogador " + jog.getNome() + " comprou uma casa para " + terreno.getNome() + ".");
 							System.out.println("Casa comprada!\n" + terreno);
 						}
 						catch (Exception e) {
@@ -340,7 +353,8 @@ public class Main {
 					else if (optTerreno == 2) {
 						try {
 							terreno.comprarHotel();
-							System.out.println("Casa comprada!\n" + terreno);
+							tab.salvaLog("Jogador " + jog.getNome() + " comprou um hotel para " + terreno.getNome() + ".");
+							System.out.println("Hotel comprado!\n" + terreno);
 						}
 						catch (Exception e) {
 							System.err.println("Falha na compra :( Confira se tem dinheiro ou casas o suficiente!");
@@ -351,10 +365,12 @@ public class Main {
 					break;
 				case 4: //Pegar carta
 					for (int i = 0; i < cartas.size(); i++) {
-						if (cartas.get(i).getDono() == null) {
+						if (cartas.get(i).getDono() == null && cartas.get(i) instanceof CartaSorte) {
 							jog.adicionarCarta(cartas.get(i));
 							System.out.println("Carta adicionada ao baralho do jogador:" + cartas.get(i));
-							// por enquanto, deixei para que, se for uma carta sorte-revés, o jogador faça as mudanças manualmente
+							cartas.get(i).setDono(jog);
+							((CartaSorte)cartas.get(i)).executaAcao(jog);
+							tab.salvaLog("Jogador " + jog.getNome() + " pegou a carta " + cartas.get(i).getDescricao() + ".");
 							break;
 						}
 						System.out.println("Pilha de cartas esgotada!");
@@ -364,6 +380,7 @@ public class Main {
 					break;
 				}
 				System.out.println("Situação atual de " + jog.getNome() + "\n" + jog);
+				tab.salvaLog("Situacao atual de " + jog.getNome() + ":\n" + jog);
 		} while (opt!= 5);
 		return 0;
 	}

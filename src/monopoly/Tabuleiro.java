@@ -4,9 +4,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/* Classe Tabuleiro: representa o tabuleiro do jogo criado
+ * - Atributos: jogadores, propriedades, logs.
+ * - Metodos:	getters e setters; addJogador; removeJogador; addPropriedade; removePropriedade; salvaLog; distribuirCartas.
+ */
+
 public class Tabuleiro implements Salvavel{
 	private ArrayList<Jogador> jogadores = null; 
 	private ArrayList<Propriedade> propriedades = null;
+	private ArrayList<String> logs = new ArrayList<>();
 
 	public Tabuleiro() {
 		this.jogadores = new ArrayList<Jogador>();
@@ -86,12 +92,14 @@ public class Tabuleiro implements Salvavel{
 
 	// salvaLog tem parâmetro em string log, ou seja, as ações serão passadas como parâmetro em cada método
 	public boolean salvaLog(String log) {
+		logs.add(log + "\ns");
 		try {
-			File file = new File("/home/biabuarque/Desktop/322/src/monopoly/log.txt");
-                    try (FileWriter writer = new FileWriter(file, true)) {
-                        writer.write(log + "\n");
-                    }
-					
+			try(FileOutputStream out = new FileOutputStream("log.txt");
+            ObjectOutputStream obj = new ObjectOutputStream(out)) {
+                for(String l : logs) {
+                    obj.writeObject(l);
+				}
+			}
 			return true;
 		} catch (IOException e) {
 			System.err.println("Error occurred while saving log: " + e.getMessage());

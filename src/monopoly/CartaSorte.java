@@ -89,11 +89,11 @@ public class CartaSorte extends Carta {
 		if (valor <= 0){
 			try {
 				jogador.prejuizo((int)valor);
-			} catch (Exception e) {
+			} catch (PlayerException e) {
 				try {
 					jogador.prejuizo(jogador.getDinheiro());
 					System.out.println("Jogador " + jogador.getNome() + " faliu!");
-				} catch (Exception impossible) {
+				} catch (PlayerException impossible) {
 				}
 			}
 		}
